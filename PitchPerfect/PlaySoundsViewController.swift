@@ -35,6 +35,7 @@ class PlaySoundsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setContentMode(of: snailButton, chipmunkButton, rabbitButton, vaderButton, echoButton,reverbButton, stopButton, to: .scaleAspectFit)
         setupAudio()
     }
     
@@ -73,6 +74,10 @@ class PlaySoundsViewController: UIViewController {
         stopAudio()
     }
     
-    
+    func setContentMode(of buttons: UIButton..., to contentMode: UIView.ContentMode) {
+        for button in buttons {
+            button.imageView?.contentMode = contentMode
+        }
+    }
 }
 
