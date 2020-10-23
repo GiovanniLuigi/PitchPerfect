@@ -29,7 +29,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             playSoundsVC.recordedAudioURL = recordedAudioURL
         }
     }
-
+    
     @IBAction func recordAudio(_ sender: UIButton) {
         configUI(isRecording: true)
         
@@ -40,7 +40,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
-
+        
         try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
         audioRecorder.delegate = self
         audioRecorder.isMeteringEnabled = true
@@ -69,13 +69,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     func configUI(isRecording: Bool) {
         if isRecording {
             recordingLabel.text = "Recording in Progress..."
-            stopRecordingButton.isEnabled = true
-            recordButton.isEnabled = false
         } else {
             recordingLabel.text = "Tap to Record"
-            stopRecordingButton.isEnabled = false
-            recordButton.isEnabled = true
         }
+        stopRecordingButton.isEnabled = isRecording
+        recordButton.isEnabled = !isRecording
     }
     
     
